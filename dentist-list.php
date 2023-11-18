@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Transactions</title>
+        <title>Dentist Lists</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
@@ -70,25 +70,25 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">List of Transactions</h1>
+                        <h1 class="mt-4">List of Dentists</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Transactions</li>
+                            <li class="breadcrumb-item active">Dentist List</li>
                         </ol>
                         <div class="card mb-4">
                             <div class="card-header d-flex align-items-center justify-content-between">
                                 <div >
                                     <i class="fas fa-table me-1 ms-2"></i>
-                                    Transactions
+                                    Dentist List
                                 </div>
                                 <div>
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
                                         <i class="fa-solid fa-plus"></i>
-                                        Add Transaction
+                                        Add Dentist
                                     </button>
                                     <button type="button" class="btn btn-primary" href="test.php">
                                         <i class="fa-regular fa-circle-check"></i>
-                                        Select Transaction
+                                        Delete Dentist
                                     </button>
                                 </div>
                                 
@@ -98,7 +98,7 @@
                                     <?php
                                         require_once 'config.php' ;
 
-                                        $sql = 'SELECT * FROM transactions';
+                                        $sql = 'SELECT * FROM dentist_list';
                                         $result = $conn->query($sql);
                                         $arr_records = [];
                                         if ($result->num_rows > 0) {
@@ -107,11 +107,9 @@
                                     ?>
                                     <thead>
                                         <tr>
-                                            <th>ID</th>
-                                            <th>Date of Transaction</th>
-                                            <th>Client Name</th>
-                                            <th>Nature of Case</th>
-                                            <th>Price</th>
+                                            <th>Name</th>
+                                            <th>Clinic Address</th>
+                                            <th>Contact Number</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -129,11 +127,9 @@
                                         <?php if(!empty($arr_records)) { ?>
                                             <?php foreach($arr_records as $record) { ?>
                                                 <tr>
-                                                    <td><?php echo $record['id']; ?></td>
-                                                    <td><?php echo $record['date_transaction']; ?></td>
                                                     <td><?php echo $record['name']; ?></td>
-                                                    <td><?php echo $record['nature_of_case']; ?></td>
-                                                    <td><?php echo $record['price']; ?></td>
+                                                    <td><?php echo $record['clinic_address']; ?></td>
+                                                    <td><?php echo $record['contact_num']; ?></td>
                                                     <td>Action</td>
                                                 </tr>
                                             <?php } ?>
@@ -148,22 +144,22 @@
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title">Add Transaction</h5>
+                                        <h5 class="modal-title">Add Dentist</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form method="post" action="add-transaction-f.php">
+                                        <form method="post" action="add-dentist-f.php">
                                             <div class="form-floating mb-3">
                                                 <input class="form-control" id="inputName" name="inputName" type="text" placeholder="Enter Name" />
                                                 <label for="inputEmail">Dentist Name</label>
                                             </div>
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="inputNatureOfCase" name="inputNatureOfCase" type="text" placeholder="Enter the Nature of Case" />
-                                                <label for="inputNatureOfCase">Nature of Case</label>
+                                                <input class="form-control" id="inputAddress" name="inputAddress" type="text" placeholder="Enter Address" />
+                                                <label for="inputAddress">Clinic Address</label>
                                             </div>
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="inputPrice" name="inputPrice" type="number" placeholder="Enter the Price"/>
-                                                <label for="inputPrice">Price</label>
+                                                <input class="form-control" id="inputContact" name="inputContact" type="number" placeholder="Enter the Contact Information"/>
+                                                <label for="inputContact">Contact Number</label>
                                             </div>
                                             <div class="text-center mt-4 mb-0">
                                             <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
